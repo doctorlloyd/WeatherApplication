@@ -1,5 +1,5 @@
 # WeatherApplication
 
-The weather application is using JetPack Compose.
-The weather API is Open Weather.
-Using MVVM architecture dev pattern.
+1. The weather application is using JetPack Compose. <br/>
+2. The weather API is Open Weather.<br/>
+3. Using MVVM architecture dev pattern.
