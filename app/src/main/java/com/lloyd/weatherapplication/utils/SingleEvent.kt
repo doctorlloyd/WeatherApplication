@@ -1,5 +1,8 @@
-package com.lloyd.weatherapplication.utils
+package com.lloyd.weather.utils
 
+/**
+ * Used as a wrapper for data that is exposed via a LiveData that represents an event.
+ */
 open class SingleEvent<out T>(private val content: T) {
 
     var hasBeenHandled = false

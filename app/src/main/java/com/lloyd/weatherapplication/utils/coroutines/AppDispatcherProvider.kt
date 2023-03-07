@@ -1,4 +1,5 @@
 package com.lloyd.weatherapplication.utils.coroutines
 
-class AppDispatcherProvider {
-}
+import javax.inject.Inject
+
+class AppDispatcherProvider @Inject constructor() : DispatcherProvider
