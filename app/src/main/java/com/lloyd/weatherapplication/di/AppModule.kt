@@ -1,8 +1,8 @@
 package com.lloyd.weatherapplication.di
 
 import android.content.Context
-import com.lloyd.weather.utils.Network
-import com.lloyd.weather.utils.NetworkConnectivity
+import com.lloyd.weatherapplication.utils.Network
+import com.lloyd.weatherapplication.utils.NetworkConnectivity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

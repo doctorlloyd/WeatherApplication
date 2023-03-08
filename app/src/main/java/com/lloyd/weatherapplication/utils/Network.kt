@@ -1,4 +1,4 @@
-package com.lloyd.weather.utils
+package com.lloyd.weatherapplication.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

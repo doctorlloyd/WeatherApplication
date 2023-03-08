@@ -1,7 +1,7 @@
 package com.lloyd.weatherapplication.data.remote
 
 
-import com.lloyd.weather.utils.NetworkConnectivity
+import com.lloyd.weatherapplication.utils.NetworkConnectivity
 import com.lloyd.weatherapplication.data.Resource
 import com.lloyd.weatherapplication.data.error.NO_INTERNET_CONNECTION
 import com.lloyd.weatherapplication.data.models.LocationWeather

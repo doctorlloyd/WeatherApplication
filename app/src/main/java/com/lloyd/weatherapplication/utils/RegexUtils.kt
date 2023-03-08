@@ -1,4 +1,4 @@
-package com.lloyd.weather.utils
+package com.lloyd.weatherapplication.utils
 
 import java.util.regex.Pattern
 

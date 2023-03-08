@@ -1,7 +1,5 @@
 package com.lloyd.weatherapplication.utils
 
-import com.lloyd.weather.utils.SimpleCountingIdlingResource
-
 
 /**
  * Contains a static reference to [IdlingResource], only available in the 'mock' build type.

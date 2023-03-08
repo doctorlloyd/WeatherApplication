@@ -1,0 +1,76 @@
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            WeatherApplicationTheme {
+                Column(
+                    modifier = Modifier
+                        .padding(30.dp)
+                        .fillMaxWidth()
+                        .wrapContentSize(Alignment.Center)
+                        .clickable(onClick = {
+                            Toast
+                                .makeText(baseContext, "You clicked me", Toast.LENGTH_SHORT)
+                                .show()
+                        })
+                        .clip(shape = RoundedCornerShape(16.dp)),
+                ) {
+                    body()
+                    subBody()
+                }
+            }
+        }
+    }
+
+
+    @Composable
+    private fun subBody() {
+        Box(
+            contentAlignment = Alignment.Center
+        ) {
+            Column {
+                Text(
+                    text = "0000",
+                    Modifier
+                        .wrapContentSize(Alignment.Center),
+                    textAlign = TextAlign.Center,
+                    style = typography.h1,
+                )
+                Row {
+                    Text(
+                        text = "Status", Modifier.padding(16.dp),
+                        textAlign = TextAlign.Center,
+                        style = typography.h5,
+                    )
+                    Text(
+                        text = "Check", Modifier.padding(16.dp),
+                        textAlign = TextAlign.Center,
+                        style = typography.h5,
+                    )
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun body() {
+
+        Box(
+            contentAlignment = Alignment.Center, modifier = Modifier.wrapContentSize()
+        ) {
+            Column(Modifier.safeContentPadding()) {
+                Text(
+                    text = "Location Name",
+                    Modifier
+                        .padding(16.dp)
+                        .wrapContentSize(Alignment.Center),
+                    textAlign = TextAlign.Center,
+                    style = typography.h4,
+                )
+            }
+        }
+    }
+
+    @Composable
+    private fun appBar() {
+        TODO("Not yet implemented")
+    }

@@ -1,6 +1,6 @@
-package com.lloyd.weather.utils
-import androidx.test.espresso.IdlingResource
+package com.lloyd.weatherapplication.utils
 
+import androidx.test.espresso.IdlingResource
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
