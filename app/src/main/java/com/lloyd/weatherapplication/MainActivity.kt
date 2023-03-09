@@ -20,5 +20,4 @@ import com.lloyd.weatherapplication.ui.theme.WeatherApplicationTheme
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class MainActivity : Application() {
-}
+open class MainActivity : Application()

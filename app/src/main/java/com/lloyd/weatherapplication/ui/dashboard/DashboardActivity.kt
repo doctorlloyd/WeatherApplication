@@ -1,61 +1,97 @@
 package com.lloyd.weatherapplication.ui.dashboard
 
-import androidx.annotation.VisibleForTesting
+import android.annotation.SuppressLint
+import android.os.Bundle
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.lloyd.weatherapplication.data.DataRepositorySource
 import com.lloyd.weatherapplication.data.Resource
 import com.lloyd.weatherapplication.data.models.LocationWeather
-import com.lloyd.weatherapplication.ui.base.BaseViewModel
+import com.lloyd.weatherapplication.ui.base.BaseActivity
 import com.lloyd.weatherapplication.utils.SingleEvent
-import com.lloyd.weatherapplication.utils.wrapEspressoIdlingResource
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.lloyd.weatherapplication.utils.observe
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class DashboardActivity @Inject constructor(private val dataRepositoryRepository: DataRepositorySource) : BaseViewModel() {
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    val weatherLiveDataPrivate = MutableLiveData<Resource<LocationWeather>>()
-    val weatherLiveData: LiveData<Resource<LocationWeather>> get() = weatherLiveDataPrivate
+@ExperimentalFoundationApi
+@AndroidEntryPoint
+open class DashboardActivity : BaseActivity() {
+    private val dashboardViewModel: DashboardViewModel by viewModels()
 
-    /**
-     * UI actions as event, user action is single one time event, Shouldn't be multiple times consumption
-     */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    private val openWeatherDetailsPrivate = MutableLiveData<SingleEvent<LocationWeather>>()
-    val openWeatherDetails: LiveData<SingleEvent<LocationWeather>> get() = openWeatherDetailsPrivate
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
 
-    /**
-     * Error handling as UI
-     */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    private val showSnackBarPrivate = MutableLiveData<SingleEvent<Any>>()
-    val showSnackBar: LiveData<SingleEvent<Any>> get() = showSnackBarPrivate
+        }
+    }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    private val showToastPrivate = MutableLiveData<SingleEvent<Any>>()
-    val showToast: LiveData<SingleEvent<Any>> get() = showToastPrivate
+    override fun showDataView(b: Boolean) {
+        if(b){
+            //Todo show information
+        }
+    }
 
+    override fun showLoadingView() {
+        //Todo show loader
+    }
 
-    fun getWeather() {
-        viewModelScope.launch {
-            weatherLiveDataPrivate.value = Resource.Loading()
-            wrapEspressoIdlingResource {
-                dataRepositoryRepository.requestWeatherByLocationName().collect {
-                    weatherLiveDataPrivate.value = it
-                }
+    override fun bindListData(locationWeather: LocationWeather) {
+        //Todo show UI and populated data
+    }
+
+    private fun handleWeatherList(status: Resource<LocationWeather>) {
+        when (status) {
+            is Resource.Loading -> showLoadingView()
+            is Resource.Success -> status.data?.let { bindListData(locationWeather = it) }
+            is Resource.DataError -> {
+                showDataView(false)
+                status.errorCode?.let { dashboardViewModel.showToastMessage(it) }
             }
         }
     }
 
-    fun openWeatherDetails(weather: LocationWeather) {
-        openWeatherDetailsPrivate.value = SingleEvent(weather)
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+    @Composable
+    private fun ObserveSnackBarMessages(event: LiveData<SingleEvent<Any>>) {
+
+        val scaffoldState: ScaffoldState = rememberScaffoldState()
+        val coroutineScope: CoroutineScope = rememberCoroutineScope()
+
+        Scaffold(scaffoldState = scaffoldState) {
+            Button(onClick = {
+                coroutineScope.launch {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = "This is your message",
+                        actionLabel = event.toString()
+                    )
+                }
+            }) {
+                //TODO action needed when snackBar button is clicked
+                Text(text = "Click me!")
+            }
+        }
     }
 
-    fun showToastMessage(errorCode: Int) {
-        val error = errorManager.getError(errorCode)
-        showToastPrivate.value = SingleEvent(error.description)
+    @Composable
+    private fun ObserveToast(event: LiveData<SingleEvent<Any>>) {
+
+    }
+
+    @Composable
+    override fun ObserveViewModel() {
+        observe(dashboardViewModel.weatherLiveData, ::handleWeatherList)
+//        observeEvent(dashboardViewModel.openWeatherDetails, ::navigateToDetailsScreen)
+        ObserveSnackBarMessages(dashboardViewModel.showSnackBar)
+        ObserveToast(dashboardViewModel.showToast)
+    }
+
+    @Composable
+    override fun InitViewBinding() {
+        TODO("Not yet implemented")
     }
 }
