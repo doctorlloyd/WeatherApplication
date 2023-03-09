@@ -31,23 +31,26 @@ open class DashboardActivity : BaseActivity() {
     }
 
     override fun showDataView(b: Boolean) {
-        if(b){
+        if (b) {
             //Todo show information
+
         }
     }
 
     override fun showLoadingView() {
         //Todo show loader
+
     }
 
-    override fun bindListData(locationWeather: LocationWeather) {
+    override fun bindWeatherData(locationWeather: LocationWeather) {
         //Todo show UI and populated data
+//        Text(text = locationWeather.name)
     }
 
     private fun handleWeatherList(status: Resource<LocationWeather>) {
         when (status) {
             is Resource.Loading -> showLoadingView()
-            is Resource.Success -> status.data?.let { bindListData(locationWeather = it) }
+            is Resource.Success -> status.data?.let { bindWeatherData(locationWeather = it) }
             is Resource.DataError -> {
                 showDataView(false)
                 status.errorCode?.let { dashboardViewModel.showToastMessage(it) }

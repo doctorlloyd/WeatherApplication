@@ -19,12 +19,6 @@ abstract class BaseActivity : ComponentActivity() {
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
     @Composable
     abstract fun ObserveViewModel()
     @Composable
@@ -33,5 +27,5 @@ abstract class BaseActivity : ComponentActivity() {
 
     abstract fun showLoadingView()
     abstract fun showDataView(b: Boolean)
-    abstract fun bindListData(locationWeather: LocationWeather)
+    abstract fun bindWeatherData(locationWeather: LocationWeather)
 }
