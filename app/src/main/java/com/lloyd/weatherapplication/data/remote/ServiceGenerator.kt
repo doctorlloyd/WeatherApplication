@@ -1,9 +1,9 @@
 package com.lloyd.weatherapplication.data.remote
 
+import com.lloyd.weatherapplication.BASE_URL
 import com.lloyd.weatherapplication.BuildConfig
-import com.lloyd.weatherapplication.data.remote.moshi.MyKotlinJsonAdapterFactory
-import com.lloyd.weatherapplication.data.remote.moshi.MyStandardJsonAdapters
-import com.lloyd.weatherapplication.utils.BASE_URL
+import com.lloyd.weatherapplication.data.remote.moshiFactories.MyKotlinJsonAdapterFactory
+import com.lloyd.weatherapplication.data.remote.moshiFactories.MyStandardJsonAdapters
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -14,10 +14,10 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private const val timeoutRead = 30  //In seconds
+private const val timeoutRead = 300   //In seconds
 private const val contentType = "Content-Type"
 private const val contentTypeValue = "application/json"
-private const val timeoutConnect = 30   //In seconds
+private const val timeoutConnect = 300   //In seconds
 
 @Singleton
 class ServiceGenerator @Inject constructor() {

@@ -1,4 +1,4 @@
-package com.lloyd.weatherapplication.utils
+package com.lloyd.weatherapplication
 
 
 const val NO_INTERNET_CONNECTION = "No network Connection!!"

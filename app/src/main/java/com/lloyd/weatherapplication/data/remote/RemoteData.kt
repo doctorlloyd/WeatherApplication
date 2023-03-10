@@ -1,12 +1,11 @@
 package com.lloyd.weatherapplication.data.remote
 
-
-import com.lloyd.weatherapplication.utils.NetworkConnectivity
 import com.lloyd.weatherapplication.data.Resource
+import com.lloyd.weatherapplication.data.error.NETWORK_ERROR
 import com.lloyd.weatherapplication.data.error.NO_INTERNET_CONNECTION
 import com.lloyd.weatherapplication.data.models.LocationWeather
 import com.lloyd.weatherapplication.data.remote.service.WeatherService
-import com.lloyd.weatherapplication.utils.AppConstants
+import com.lloyd.weatherapplication.utils.NetworkConnectivity
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
@@ -40,7 +39,7 @@ class RemoteData @Inject constructor(
                 responseCode
             }
         } catch (e: IOException) {
-            AppConstants.NETWORK_ERROR
+            NETWORK_ERROR
         }
     }
 }

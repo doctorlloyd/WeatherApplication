@@ -22,7 +22,7 @@ abstract class BaseActivity : ComponentActivity() {
     @Composable
     abstract fun ObserveViewModel()
     @Composable
-    protected abstract fun InitViewBinding()
+    abstract fun InitViewBinding()
 
 
     abstract fun showLoadingView()

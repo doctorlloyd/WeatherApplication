@@ -1,4 +1,4 @@
-package com.lloyd.weatherapplication.data.remote.moshi
+package com.lloyd.weatherapplication.data.remote.moshiFactories
 
 import com.squareup.moshi.*
 import com.squareup.moshi.internal.Util
@@ -206,7 +206,7 @@ class MyKotlinJsonAdapterFactory : JsonAdapter.Factory {
                         "${parameter.type} but a property of type ${property.returnType}.")
             }
 
-            if (property !is KMutableProperty1<*, *> && parameter == null) continue
+            if (property !is KMutableProperty1 && parameter == null) continue
 
             property.isAccessible = true
             val allAnnotations = property.annotations.toMutableList()

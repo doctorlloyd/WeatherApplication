@@ -1,4 +1,4 @@
-package com.lloyd.weatherapplication.data.remote.moshi;
+package com.lloyd.weatherapplication.data.remote.moshiFactories;
 
 import androidx.annotation.Nullable;
 
