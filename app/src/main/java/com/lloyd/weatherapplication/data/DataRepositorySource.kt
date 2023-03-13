@@ -1,6 +1,6 @@
 package com.lloyd.weatherapplication.data
 
-import com.lloyd.weatherapplication.data.models.LocationWeather
+import com.lloyd.weatherapplication.data.network.domain.LocationWeather
 import kotlinx.coroutines.flow.Flow
 
 interface DataRepositorySource {

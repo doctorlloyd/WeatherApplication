@@ -3,8 +3,8 @@ package com.lloyd.weatherapplication.data.remote
 import com.lloyd.weatherapplication.data.Resource
 import com.lloyd.weatherapplication.data.error.NETWORK_ERROR
 import com.lloyd.weatherapplication.data.error.NO_INTERNET_CONNECTION
-import com.lloyd.weatherapplication.data.models.LocationWeather
-import com.lloyd.weatherapplication.data.remote.service.WeatherService
+import com.lloyd.weatherapplication.data.network.api.WeatherApi
+import com.lloyd.weatherapplication.data.network.domain.LocationWeather
 import com.lloyd.weatherapplication.utils.NetworkConnectivity
 import retrofit2.Response
 import java.io.IOException
@@ -15,7 +15,7 @@ class RemoteData @Inject constructor(
     private val networkConnectivity: NetworkConnectivity
 ) : RemoteDataSource {
     override suspend fun requestWeather(): Resource<LocationWeather> {
-        val weatherService = serviceGenerator.createService(WeatherService::class.java)
+        val weatherService = serviceGenerator.createService(WeatherApi::class.java)
         return when (val response = processCall(weatherService::fetchWeather)) {
             is LocationWeather -> {
                 Resource.Success(data = response)
@@ -24,6 +24,10 @@ class RemoteData @Inject constructor(
                 Resource.DataError(errorCode = response as Int)
             }
         }
+    }
+
+    override suspend fun requestWeeklyWeather(): Resource<List<LocationWeather>> {
+        TODO("Not yet implemented")
     }
 
     private suspend fun processCall(responseCall: suspend () -> Response<*>): Any? {
