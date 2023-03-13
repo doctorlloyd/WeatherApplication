@@ -13,11 +13,13 @@ data class WeatherEntity constructor(
     val icon: String
 )
 
-fun WeatherEntity.asDomainModel(): Weather {
-    return Weather(
-        id = id,
-        main = main,
-        description = description,
-        icon = icon
-    )
+fun List<WeatherEntity>.asDomainModel(): List<Weather> {
+    return map{
+        Weather(
+            id = it.id,
+            main = it.main,
+            description = it.description,
+            icon = it.icon
+        )
+    }
 }
