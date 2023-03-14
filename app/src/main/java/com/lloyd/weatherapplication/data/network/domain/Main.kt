@@ -1,7 +1,7 @@
 package com.lloyd.weatherapplication.data.network.domain
 
 data class Main(
-    val temperature: Double,
+    val temp: Double,
     val feels_like: Double,
     val temp_min: Double,
     val temp_max: Double,

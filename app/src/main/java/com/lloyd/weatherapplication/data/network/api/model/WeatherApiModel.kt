@@ -1,6 +1,7 @@
 package com.lloyd.weatherapplication.data.network.api.model
 
 import com.lloyd.weatherapplication.data.database.LocationWeatherEntity
+import com.lloyd.weatherapplication.data.database.WeatherEntity
 import com.lloyd.weatherapplication.data.network.domain.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -22,9 +23,9 @@ data class WeatherApiModel(
     @Json(name = "cod") val cod:Int
 )
 
-fun List<Weather>.asDatabaseModel(): List<Weather> {
+fun List<Weather>.asDatabaseModel(): List<WeatherEntity> {
     return map {
-        Weather(
+        WeatherEntity(
             id = it.id,
             main = it.main,
             description = it.description,

@@ -1,7 +1,7 @@
 package com.lloyd.weatherapplication.ui.dashboard
 
-import com.lloyd.weatherapplication.data.network.domain.LocationWeather
+import com.lloyd.weatherapplication.data.database.LocationWeatherEntity
 
 data class DashboardUiState(
-    val locationWeather: LocationWeather = LocationWeather(), val offline: Boolean = false
+    val list: List<LocationWeatherEntity> = listOf(), val offline: Boolean = false
 )

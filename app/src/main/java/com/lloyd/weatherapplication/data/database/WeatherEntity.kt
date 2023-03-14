@@ -1,12 +1,14 @@
 package com.lloyd.weatherapplication.data.database
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.lloyd.weatherapplication.data.network.domain.Weather
 
-@Entity
+@Entity(tableName = "weather")
 data class WeatherEntity constructor(
     @PrimaryKey
+    @ColumnInfo(name = "weather_id")
     val id: Int,
     val main: String,
     val description: String,

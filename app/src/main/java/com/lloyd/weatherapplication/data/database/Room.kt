@@ -1,21 +1,22 @@
 package com.lloyd.weatherapplication.data.database
 
 import androidx.room.*
+import com.lloyd.weatherapplication.data.network.domain.LocationWeather
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface Room {
-    @Query("select * from WeatherEntity WHERE location LIKE :location")
-    fun getWeather(location: String): Flow<List<WeatherEntity>?>
+    @Query("select * from weather WHERE weather_id LIKE :id")
+    fun getWeather(id: String): Flow<List<WeatherEntity>?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWeather(weatherEntityList: List<WeatherEntity>)
 
-    @Query("select * from LocationWeatherEntity")
-    fun getLocationWeather(): Flow<List<LocationWeatherEntity>?>
+    @Query("select * from location")
+    fun getLocationWeather(): Flow<List<LocationWeatherEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLocationWeather(locationWeatherEntity: LocationWeatherEntity)
+    fun insertLocationWeather(locationWeather: LocationWeatherEntity)
 
 }
 
