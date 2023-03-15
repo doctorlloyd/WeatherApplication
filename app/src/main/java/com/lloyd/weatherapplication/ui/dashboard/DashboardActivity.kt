@@ -25,7 +25,6 @@ fun DashboardActivity(onUserClick: (String) -> Unit) {
         ) {
             items(uiState.list) { item ->
             }
-
         }
     }
 }

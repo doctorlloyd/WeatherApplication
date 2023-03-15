@@ -24,7 +24,7 @@ class DashboardViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             weatherRepositorySource.locationWeather.collect { list ->
                 withContext(Dispatchers.Main) {
-                    uiState = if (list.isNullOrEmpty()) {
+                    uiState = if (list.isEmpty()) {
                         uiState.copy(offline = true)
                     } else {
                         uiState.copy(
